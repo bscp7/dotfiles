@@ -1,0 +1,26 @@
+# This is for an example purpose only, will not work without modifications
+# setup your company proxy
+join_by() {
+    local IFS="$1"
+    shift
+    echo "$*"
+}
+
+local PROXY_DOMAIN="http://yourcompany.com"
+local PROXY_PORT="9080"
+local PROXY_BYPASS_DOMAINS=(
+    ".local"
+    "*.local"
+    "yourcompany.com"
+    "127.0.0.1"
+    "localhost"
+)
+export http_proxy="$PROXY_DOMAIN:$PROXY_PORT"
+export https_proxy=$http_proxy
+export ftp_proxy=$http_proxy
+export rsync_proxy=$http_proxy
+export ALL_PROXY=$http_proxy
+
+local proxy_bypass_domains
+proxy_bypass_domains=$(join_by "," "${PROXY_BYPASS_DOMAINS[@]}")
+export no_proxy="$proxy_bypass_domains"
