@@ -1,0 +1,10 @@
+sandbox_init_proxy_settings(){
+  source $HOME/.proxy_settings
+}
+
+# create hooks for commands 'curl', 'python' and 'docker'
+sandbox_hook proxy_settings curl
+sandbox_hook proxy_settings python
+sandbox_hook proxy_settings docker
+sandbox_hook proxy_settings docker-compose
+sandbox_hook proxy_settings docker-machine
