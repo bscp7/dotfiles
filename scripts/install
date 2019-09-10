@@ -10,3 +10,19 @@ find $DOTFILES -name install.sh | while read -r installer; do
 	echo "› ${installer}..."
 	sh -c "$installer"
 done
+
+# Backup existing config files
+timestamp=$(date +"%FT%H%M%z")
+if test -f $HOME/.zshrc; then
+	cp $HOME/.zshrc $HOME/.zshrc.$timestamp
+fi
+if test -f $HOME/.sandboxrc; then
+	cp $HOME/.sandboxrc $HOME/.sandboxrc.$timestamp
+fi
+if test -f $HOME/.proxy_settings; then
+	cp $HOME/.proxy_settings $HOME/.proxy_settings.$timestamp
+fi
+echo "Existing zsh config files backup with <name>.'$timestamp' prefix"
+echo ""
+echo "Copy .zshrc .sandboxrc (optional) .proxy_settings (optional) to your home directory and reload the terminal"
+unset timestamp
