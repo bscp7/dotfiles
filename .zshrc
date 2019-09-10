@@ -37,6 +37,9 @@ for file in ${(M)config_files:#*/completion.zsh}; do
   source "$file"
 done
 
+# Advanced tab-completion
+autoload -Uz compinit && compinit -i
+
 unset config_files
 
 # search history with fzf if installed, default otherwise
