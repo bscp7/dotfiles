@@ -6,6 +6,7 @@ then
   echo "  Installing Homebrew for you."
 
   if test "$(uname)" = "Darwin"
+  then
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
 
