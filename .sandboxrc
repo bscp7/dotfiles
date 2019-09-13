@@ -1,8 +1,11 @@
 sandbox_init_proxy_settings(){
-  source $HOME/.proxy_settings
+  if test -f $HOME/.proxy_settings; then
+    source $HOME/.proxy_settings
+  fi
 }
 
 # create hooks for commands 'curl', 'python' and 'docker'
+# Refer https://github.com/benvan/sandboxd for more details on hooks
 sandbox_hook proxy_settings curl
 sandbox_hook proxy_settings python
 sandbox_hook proxy_settings docker

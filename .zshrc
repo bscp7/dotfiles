@@ -1,6 +1,10 @@
 # initializes proxy settings
 # load sandboxd config from ~/.sandboxrc
-source $HOME/sandboxd
+sandboxpath=$(antibody list | grep sandboxd | tr -s '[:space:]' | cut -d " " -f 2)
+if test -f $sandboxpath; then
+  source $sandboxpath
+fi
+unset sandboxpath
 
 # shortcut to this dotfiles path is $DOTFILES
 export DOTFILES="$HOME/.dotfiles"
@@ -42,10 +46,15 @@ autoload -Uz compinit && compinit -i
 
 unset config_files
 
+# load local exports
+if test -f $HOME/.local_exports; then
+  . $HOME/.local_exports
+fi
+
 # search history with fzf if installed, default otherwise
 if test -d /usr/local/opt/fzf/shell; then
 	# shellcheck disable=SC1091
-	. /usr/local/opt/fzf/shell/key-bindings.zsh
+	source /usr/local/opt/fzf/shell/key-bindings.zsh
 else
 	bindkey '^R' history-incremental-search-backward
 fi

@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+mkdir -p $HOME/Documents/bkup/config_files
+
+BACKUP_FOLDER=$HOME/Documents/bkup/config_files
+
+FILES=(
+    $HOME/.zshrc
+    $HOME/.zsh_history
+    $HOME/.python_history
+    $HOME/.vimrc
+    $HOME/.sandboxrc
+    $HOME/.proxy_settings
+    $HOME/.fzf.zsh
+    $HOME/.gitconfig
+    $HOME/.gitignore
+    $HOME/.zsh_history
+    $HOME/.pypirc
+    $HOME/.local_exports
+)
+
+timestamp=$(date +"%FT%H%M%z")
+for FILE in ${FILES[@]}
+do
+    if test -f $FILE; then
+        backup_filename=$(basename $FILE)
+        backup_path=$BACKUP_FOLDER/$backup_filename.$timestamp
+        echo copy ${FILE} at $backup_path
+        cp $FILE $backup_path
+    fi
+done
+
+DISP_COLOR='\033[0;32m' #Green color
+NO_COLOR='\033[0m' # No Color
+echo -e "\n${DISP_COLOR}Backup completed successfully${NO_COLOR}"
+
+unset FILES
+unset BACKUP_FOLDER

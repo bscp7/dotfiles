@@ -3,6 +3,11 @@
 # Run all dotfiles installers.
 set -e
 
+export DOTFILES="$HOME/.dotfiles"
+
+echo "copy .zshrc file to $HOME/.zshrc"
+cp $DOTFILES/.zshrc $HOME/.zshrc
+
 cd "$(dirname "$0")"/..
 
 # find the installers and run them iteratively
@@ -11,18 +16,12 @@ find $DOTFILES -name install.sh | while read -r installer; do
 	sh -c "$installer"
 done
 
-# Backup existing config files
-timestamp=$(date +"%FT%H%M%z")
-if test -f $HOME/.zshrc; then
-	cp $HOME/.zshrc $HOME/.zshrc.$timestamp
-fi
-if test -f $HOME/.sandboxrc; then
-	cp $HOME/.sandboxrc $HOME/.sandboxrc.$timestamp
-fi
-if test -f $HOME/.proxy_settings; then
-	cp $HOME/.proxy_settings $HOME/.proxy_settings.$timestamp
-fi
-echo "Existing zsh config files backup with <name>.'$timestamp' prefix"
-echo ""
-echo "Copy .zshrc .sandboxrc (optional) .proxy_settings (optional) to your home directory and reload the terminal"
+DISP_COLOR="\033[0;32m" #Green color
+NO_COLOR="\033[0m" # No Color
+echo -e "\n${DISP_COLOR}Installation completed successfully${NO_COLOR}"
+
+DISP_COLOR="\033[0;33m" #Yellow color
+echo -e "\n${DISP_COLOR}[Optional] Copy .local_exports, .sandboxrc, .proxy_settings in to your home directory and reload the terminal${NO_COLOR}"
+
 unset timestamp
+unset DOTFILES
