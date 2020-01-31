@@ -1,9 +1,5 @@
 #!/bin/sh
 
-hello() {
-  echo 'hello...'
-}
-
 encode64() {
     echo -ne "$1" | base64
 }
