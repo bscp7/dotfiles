@@ -2,7 +2,7 @@
 
 # activate python virtualenv
 py37() {
-    source $HOME/py37venv/bin/activate
+    source $HOME/py37/bin/activate
 }
 
 pyvenv() {
