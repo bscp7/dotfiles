@@ -2,7 +2,7 @@ alias reload='echo "exec \$SHELL" && exec $SHELL'  # reload shell
 
 alias g2w="cd $HOME/Documents/repo" # go to repos dir
 
-alias goa="cd $HOME/Documents/repo/code/go" # go to Go dir
+alias g2g="cd $HOME/Documents/repo/code/go" # go to Go dir
 
 alias edot="code $HOME/.dotfiles" # Edit dotfiles
 
