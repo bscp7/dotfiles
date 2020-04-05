@@ -3,9 +3,15 @@
 # Run all dotfiles installers.
 set -e
 
+echo "Start backup"
+$HOME/.dotfiles/scripts/backup
+echo "Backup complete"
+
 export DOTFILES="$HOME/.dotfiles"
+echo "Setting up dotfiles in $DOTFILES"
 
 echo "copy .zshrc file to $HOME/.zshrc"
+cp $HOME/.zshrc $HOME/.zshrc.bak-$(date '+%Y%m%d')
 cp $DOTFILES/.zshrc $HOME/.zshrc
 
 cd "$(dirname "$0")"/..
